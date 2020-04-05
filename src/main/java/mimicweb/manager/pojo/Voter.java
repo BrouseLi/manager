@@ -1,0 +1,13 @@
+package mimicweb.manager.pojo;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Voter {
+    private String voter_ip;
+    private String voter_state;
+}
