@@ -12,5 +12,5 @@ public class ScheduleStrage {
     private String time;
     private String  ip;
     private String  status;
-    private String  strage;
+    private String  strategy;
 }
