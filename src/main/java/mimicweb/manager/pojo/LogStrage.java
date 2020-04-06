@@ -11,6 +11,6 @@ import java.util.List;
 @ToString
 public class LogStrage {
     private String strategy;
-    private String value;
+    private List<String> value;
     private List<Disk> chart;
 }

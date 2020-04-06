@@ -32,12 +32,17 @@ public class LogManagerController {
         List<StrageMap>logStrageList=queryService.queryLogStrage();
         StrageMap strageMap=logStrageList.get(0);
         StrageMap strageMap1=logStrageList.get(1);
+        List<String>listValue=new ArrayList<>();
         if(strageMap.getSid().equals(sid)){
+            listValue.add(strageMap.getTime());
+            listValue.add(strageMap.getBase());
             logStrage.setStrategy(strageMap.getStrategy());
-            logStrage.setValue(strageMap.getTime());
+            logStrage.setValue(listValue);
         }else{
+            listValue.add(strageMap1.getTime());
+            listValue.add(strageMap1.getBase());
             logStrage.setStrategy(strageMap1.getStrategy());
-            logStrage.setValue(strageMap1.getTime());
+            logStrage.setValue(listValue);
         }
         List<Disk>list=new ArrayList<>();
         DiskUtil.initDiskFree();
@@ -49,27 +54,29 @@ public class LogManagerController {
     @RequestMapping("/api/logman/logStrategy")
     public String updateLogStrage(@RequestBody  StrageMap strageMap){
         ExecuteMessage executeMessage=new ExecuteMessage();
-        if (!StringUtils.isEmpty(strageMap)){
-            if("".equals(strageMap.getTime())){
+        int base=0;
+        String time=strageMap.getTime();
+            if("".equals(time)){
                 try{
-                    int base=Integer.parseInt(strageMap.getBase());
+                    base=Integer.parseInt(strageMap.getBase());
                 }catch (Exception e){
                     executeMessage.setCode(1);
                     executeMessage.setMsg("base 格式转化错误要求为数字");
                 }
-                int a = queryService.updateLogStrageByBase(strageMap.getSid(),strageMap.getBase());
+                System.out.println("接收到base 值为"+base);
+                int a = queryService.updateLogStrageByBase(strageMap.getSid(),String.valueOf(base));
                 if(a>0){
                     executeMessage.setMsg("更新成功");
                     executeMessage.setCode(0);
                 }
             }else{
+                System.out.println("获取到时间"+strageMap.getTime());
                 int a=queryService.updateLogStrageByTime(strageMap.getSid(),strageMap.getTime());
                 if(a>0){
                     executeMessage.setCode(0);
                     executeMessage.setMsg("更新成功");
                 }
             }
-        }
         executeMessage.setMsg("参数值为空");
         executeMessage.setMsg("1");
         return JSON.toJSON(executeMessage).toString();

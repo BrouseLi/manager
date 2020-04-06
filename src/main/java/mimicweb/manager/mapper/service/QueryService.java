@@ -41,7 +41,8 @@ public class QueryService {
         return queryMapper.updateTime(sid, time);
     }
     public int updateLogStrageByBase(String sid,String base ){
-        return queryMapper.updateSpace(sid, base);
+        //System.out.println("++++++++++"+base+"===========");
+        return queryMapper.updateSpace(base, sid);
     }
     public int startSchedule(String ip){
         return queryMapper.startSchedule(ip);

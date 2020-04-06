@@ -2,12 +2,15 @@ package mimicweb.manager.pojo;
 
 import lombok.*;
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class User {
+public class LoginResult {
+    private String uuid;
     private String username;
     private String password;
+    private String name;
+    private String token;
 }

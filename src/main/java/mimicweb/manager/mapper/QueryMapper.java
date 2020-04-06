@@ -38,6 +38,6 @@ public interface QueryMapper {
     int startSchedule(String ip);
     @Update("update schedule set status=0 where ip=#{ip}")
     int stopSchedule(String ip);
-    @Update("update schedule set time=#{time},strage=#{strage} where ip=#{ip}")
+    @Update("update schedule set time=#{time},strategy=#{strategy} where ip=#{ip}")
     int replaceScheduleStrage(ScheduleStrage scheduleStrage);
 }

@@ -50,6 +50,7 @@ public class ScheduleController {
             return JSON.toJSON(new ExecuteMessage(1, "关闭失败", new ArrayList<>())).toString();
         }
     }
+    @RequestMapping("/api/schedulerman/schedulerStrategy")
     public String updateScheduleStrage(@RequestBody ScheduleStrage scheduleStrage){
         if (queryService.updateScheduleStrage(scheduleStrage)>0){
             return JSON.toJSON(new ExecuteMessage(0,"更新成功",new ArrayList<>())).toString();
