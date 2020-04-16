@@ -22,6 +22,9 @@ public class QueryService {
     public List<ScheduleStrage> querySchedule(){
         return queryMapper.selectSchedule();
     }
+    public String queryBmcIp(String elementIp){
+        return queryMapper.getBmcIp(elementIp);
+    }
     public List<Voter> queryVoterList(){
         return  queryMapper.selectVoter();
     }
@@ -37,11 +40,13 @@ public class QueryService {
     public String queryStrage(){
         return queryMapper.selectStrage();
     }
+    public String queryVoterIp(String eip){
+        return queryMapper.getVoterIp(eip);
+    }
     public int updateLogStrageByTime(String sid,String time ){
         return queryMapper.updateTime(sid, time);
     }
     public int updateLogStrageByBase(String sid,String base ){
-        //System.out.println("++++++++++"+base+"===========");
         return queryMapper.updateSpace(base, sid);
     }
     public int startSchedule(String ip){

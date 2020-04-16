@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigPack>
+    <Config code="Report_Config" version="1.00" mode="transient" id="" description="数据上报配置">
+        <Policys>
+            <Policy code="IpAcl_Policy" version="1.00" id="" description="包过滤策略" reporttype="instant"/>
+            <Policy code="DoS_Policy" version="1.00" id="" description="DoS防御策略" reporttype="instant"/>
+        </Policys>
+        <Views>
+            <View code="SystemInfo_View" version="1.00" id="" description="系统信息视图" reporttype="instant"/>
+            <View code="SystemStatus_View" version="1.00" id="" description="系统状态视图" reporttype="loop">10</View>
+            <View code="SubordinaeStatus_View" version="1.00" id="" description="附属系统状态视图" reporttype="loop">10</View>
+        </Views>
+        <Events>
+            <Event code="DataDeny_Event" version="1.00" id="" description="数据阻断告警" reporttype="loop" reportlevel="info|middle|high">60</Event>
+        </Events>
+        <Logs>
+            <Log code="Operation_Log" version="1.00" id="" description="管理员操作日志" reporttype="loop" reportlevel="info|middle|high">60</Log>
+            <Log code="Error_Log" version="1.00" id="" description="故障日志" reporttype="loop" reportlevel="info|middle|high">60</Log>
+        </Logs>
+    </Config>
+</ConfigPack>
+

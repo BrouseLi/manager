@@ -1,13 +1,9 @@
 package mimicweb.manager.util;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
-public class Excutecommand {
-    public static String execute(String shell) {
-        StringBuffer bf = new StringBuffer();
+public class SystemExcute{
+    public static boolean schedule(String shell) {
         try {
             Properties props = System.getProperties();
             String [] cmds=new String[3];
@@ -22,20 +18,14 @@ public class Excutecommand {
                 cmds[2]=shell;
             }
             Process pro = Runtime.getRuntime().exec(cmds);
-            InputStream in = pro.getInputStream();
-            BufferedReader read = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line = read.readLine()) != null) {
-                bf.append(line + "\r\n");
+            int a=pro.waitFor();
+            if(a==0){
+                return true;
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String result = bf.toString();
-        if (result == null || result.equals("")) {
-            return "command not found";
-        }
-        return result;
+        return false;
     }
-
 }

@@ -6,6 +6,7 @@ import mimicweb.manager.pojo.ExecuteMessage;
 import mimicweb.manager.pojo.ScheduleStrage;
 import mimicweb.manager.pojo.TempModel;
 import mimicweb.manager.util.Datadeal;
+import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,9 @@ public class ScheduleController {
     }
     @RequestMapping("/api/schedulerman/schedulerStrategy")
     public String updateScheduleStrage(@RequestBody ScheduleStrage scheduleStrage){
+        if(!CronExpression.isValidExpression(scheduleStrage.getTime())){
+            return JSON.toJSON(new ExecuteMessage(1, "时间格式不正确", new ArrayList<>())).toString();
+        }
         if (queryService.updateScheduleStrage(scheduleStrage)>0){
             return JSON.toJSON(new ExecuteMessage(0,"更新成功",new ArrayList<>())).toString();
         }else {

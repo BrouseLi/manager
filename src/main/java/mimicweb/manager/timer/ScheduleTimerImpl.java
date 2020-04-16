@@ -10,11 +10,11 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 @Service
-public class ScheduleTimerimpl implements ScheduleTimer  {
+public class ScheduleTimerImpl implements ScheduleTimer  {
     @Autowired
     QueryService queryService;
     @Override
-    public String getscon() {
+    public String getCron() {
         return queryService.queryLogStrageTime();
     }
     public  String getLogPath(){
@@ -23,7 +23,7 @@ public class ScheduleTimerimpl implements ScheduleTimer  {
     public   String getBaseline(){
         return queryService.queryBase();
     }
-    public String getCleanstrage(){
+    public String getCleanStrategy(){
         return queryService.queryStrage();
     }
 }

@@ -5,6 +5,7 @@ import mimicweb.manager.mapper.service.QueryService;
 import mimicweb.manager.pojo.*;
 import mimicweb.manager.util.Datadeal;
 import mimicweb.manager.util.DiskUtil;
+import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,19 +30,19 @@ public class LogManagerController {
         executeMessage.setCode(0);
         executeMessage.setMsg("返回信息");
         LogStrage logStrage=new LogStrage();
-        List<StrageMap>logStrageList=queryService.queryLogStrage();
-        StrageMap strageMap=logStrageList.get(0);
-        StrageMap strageMap1=logStrageList.get(1);
+        List<StrageMap>logStrategyList=queryService.queryLogStrage();
+        StrageMap strategyMap=logStrategyList.get(0);
+        StrageMap strategyMap1=logStrategyList.get(1);
         List<String>listValue=new ArrayList<>();
-        if(strageMap.getSid().equals(sid)){
-            listValue.add(strageMap.getTime());
-            listValue.add(strageMap.getBase());
-            logStrage.setStrategy(strageMap.getStrategy());
+        if(strategyMap.getSid().equals(sid)){
+            listValue.add(strategyMap.getTime());
+            listValue.add(strategyMap.getBase());
+            logStrage.setStrategy(strategyMap.getStrategy());
             logStrage.setValue(listValue);
         }else{
-            listValue.add(strageMap1.getTime());
-            listValue.add(strageMap1.getBase());
-            logStrage.setStrategy(strageMap1.getStrategy());
+            listValue.add(strategyMap1.getTime());
+            listValue.add(strategyMap1.getBase());
+            logStrage.setStrategy(strategyMap1.getStrategy());
             logStrage.setValue(listValue);
         }
         List<Disk>list=new ArrayList<>();
@@ -63,14 +64,17 @@ public class LogManagerController {
                     executeMessage.setCode(1);
                     executeMessage.setMsg("base 格式转化错误要求为数字");
                 }
-                System.out.println("接收到base 值为"+base);
                 int a = queryService.updateLogStrageByBase(strageMap.getSid(),String.valueOf(base));
                 if(a>0){
                     executeMessage.setMsg("更新成功");
                     executeMessage.setCode(0);
                 }
             }else{
-                System.out.println("获取到时间"+strageMap.getTime());
+                if(!CronExpression.isValidExpression(strageMap.getTime())){
+                    executeMessage.setCode(1);
+                    executeMessage.setMsg("时间格式不正确");
+                    return JSON.toJSON(executeMessage).toString();
+                }
                 int a=queryService.updateLogStrageByTime(strageMap.getSid(),strageMap.getTime());
                 if(a>0){
                     executeMessage.setCode(0);

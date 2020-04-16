@@ -30,6 +30,13 @@ public interface QueryMapper {
     String selectLogBase();
     @Select("select strategy from logstrage where sid=\"主日志服务器\"")
     String selectStrage();
+    @Select("select bmcip from ipmapper where vmip=#{vmip}")
+    String getBmcIp(String vmip);
+    @Select("select voter_ip from pool where pool_ip=" +
+            "(" +
+            "select vmip from ipmapper where eip=#{eip}" +
+            ");")
+    String getVoterIp(String eip);
     @Update("update logstrage set time=#{time} where sid=#{sid}")
     int updateTime(String sid,String time);
     @Update("update logstrage set base=#{base} where sid=#{sid}")
