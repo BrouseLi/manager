@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 public class LogManagerController {
+    //添加表决器策略修改
     @Autowired
     private QueryService queryService;
     @RequestMapping("/api/logman/severList")
@@ -56,6 +57,7 @@ public class LogManagerController {
     public String updateLogStrage(@RequestBody  StrageMap strageMap){
         ExecuteMessage executeMessage=new ExecuteMessage();
         int base=0;
+        //判断不超过，当前日志总空间
         String time=strageMap.getTime();
             if("".equals(time)){
                 try{

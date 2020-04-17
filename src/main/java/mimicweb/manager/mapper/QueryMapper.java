@@ -47,4 +47,5 @@ public interface QueryMapper {
     int stopSchedule(String ip);
     @Update("update schedule set time=#{time},strategy=#{strategy} where ip=#{ip}")
     int replaceScheduleStrage(ScheduleStrage scheduleStrage);
+    //数据库连接中断
 }
