@@ -3,7 +3,7 @@ package mimicweb.manager.mapper;
 import mimicweb.manager.pojo.ScheduleStrage;
 import mimicweb.manager.pojo.StrageMap;
 import mimicweb.manager.pojo.TempModel;
-import mimicweb.manager.pojo.Voter;
+import mimicweb.manager.pojo.VoterTemp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -18,8 +18,8 @@ public interface QueryMapper {
     List<TempModel> select();
     @Select("select strategy,base,time,ip,sid from logstrage")
     List<StrageMap> selectLogStrage();
-    @Select("SELECT voter_ip ,voter_state FROM pool GROUP BY voter_ip")
-    List<Voter> selectVoter();
+    @Select("SELECT voter_ip ,voter_state,voter_strategy FROM pool GROUP BY voter_ip")
+    List<VoterTemp> selectVoter();
     @Select("select * from schedule")
     List<ScheduleStrage> selectSchedule();
     @Select("select time from logstrage where sid=\"主日志服务器\"")

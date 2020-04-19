@@ -4,7 +4,7 @@ import mimicweb.manager.mapper.QueryMapper;
 import mimicweb.manager.pojo.ScheduleStrage;
 import mimicweb.manager.pojo.StrageMap;
 import mimicweb.manager.pojo.TempModel;
-import mimicweb.manager.pojo.Voter;
+import mimicweb.manager.pojo.VoterTemp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class QueryService {
     public String queryBmcIp(String elementIp){
         return queryMapper.getBmcIp(elementIp);
     }
-    public List<Voter> queryVoterList(){
+    public List<VoterTemp> queryVoterList(){
         return  queryMapper.selectVoter();
     }
     public String queryLogStrageTime(){

@@ -23,7 +23,7 @@ public class Monitor implements SchedulingConfigurer {
                 //2.设置执行周期(Trigger)
                 triggerContext -> {
                     //2.1从配置文件获取执行周期
-                    String cron = "* * * * 1 ?";
+                    String cron = "59 * * * * ?";
                     log.info("获取到定时"+cron+"===================");
                     //2.2 返回执行周期(Date)
                     return new CronTrigger(cron).nextExecutionTime(triggerContext);

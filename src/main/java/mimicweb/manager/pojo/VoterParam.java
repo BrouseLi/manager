@@ -2,13 +2,13 @@ package mimicweb.manager.pojo;
 
 import lombok.*;
 
+import java.util.List;
 @Setter
 @Getter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-public class Voter {
-    private String ip;
-    private String sid;
+public class VoterParam {
+    private List<String> ip;
     private String strategy;
 }

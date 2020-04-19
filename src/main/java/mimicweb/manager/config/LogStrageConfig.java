@@ -24,7 +24,7 @@ public class LogStrageConfig implements SchedulingConfigurer
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.addTriggerTask(
                 //1.添加任务内容(Runnable)
-                () -> cleanStrategy.cleanStrategy(),
+                () -> cleanStrategy.timeStrategy(),
                 //2.设置执行周期(Trigger)
                 triggerContext -> {
                     //2.1从配置文件获取执行周期
